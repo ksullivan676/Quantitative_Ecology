@@ -1,6 +1,6 @@
 ---
-title: 'Ecology Workshop: Project Proposal'
-author: "Sparkle L. Malone"
+title: 'Ecology Workshop Project Proposal: Seasonal Vertical Distribution of Phytoplankton in a Subtropical Dystrophic Lake'
+author: "Kristy Sullivan"
 date: "1/10/2020"
 output: html_document
 ---
@@ -9,7 +9,24 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+### Research Statement
+
+Physical, chemical, and competative processes can influence the vertical distribution of phytoplankton in freshwater lakes. In dissolved organic carbon (DOC) rich waters, the photic zone may be limited to just a few meters below the surface. In subtropical oligotrophic Lake Annie (Highlands County, FL, USA), dissolved organic carbon quality and quantity may be a strong driver of phytoplankton assemblages spatially and temporally.
+
+### Objectives
+
+My goals in this workshop are to develop spatiotemporal species distribution models of dominant phytoplankton species in response to environmental drivers (i.e. DOC, temperature, nutrients). I hope to use the results of this project as a chapter of my masters' thesis.
+
+### Hypotheses
+
+1. Temporal Patterns: Species diversity and richness will be greatest and most variable in dark years (high DOC).
+2. Vertical Patterns: Diversity and richness will be greatest in the epilimnion due to light and resource availability.
+
+### Datasets
+
+The datasets to be used in this project include a personal dataset of phytoplankton absolute abundance, DOC quality and quantity, bacterial abundance, dissolved oxygen, and temperature measured quartly (November 2018 - January 2020) from five depths (surface, 0m; chl-maximum, 2-4m; epilimnion, 6-9m; thermocline, 7-12m; and hypolimnion, 15m) from the central buoy of Lake Annie in Highlands County, FL. A second 14 year dataset of environmental parameters and phytoplankton net tows taken monthly from the center buoy at a depth of 10 meters (2006-2019) will be accessed with permission from Archbold Biological Station. These datasets will be publically available from the Archbold Biological Station data repository: https://www.archbold-station.org/html/datapub/data/data.html
+
+### Statistical analyses
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
@@ -19,7 +36,7 @@ When you click the **Knit** button a document will be generated that includes bo
 summary(cars)
 ```
 
-## Including Plots
+### Including Plots
 
 You can also embed plots, for example:
 
