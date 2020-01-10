@@ -11,6 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Research Statement
 
+
+
+
+
+
+
+
+
 Physical, chemical, and competative processes can influence the vertical distribution of phytoplankton in freshwater lakes. In dissolved organic carbon (DOC) rich waters, the photic zone may be limited to just a few meters below the surface. In subtropical oligotrophic Lake Annie (Highlands County, FL, USA), dissolved organic carbon quality and quantity may be a strong driver of phytoplankton assemblages spatially and temporally.
 
 ### Objectives
