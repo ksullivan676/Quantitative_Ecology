@@ -1,0 +1,157 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Ecology Workshop Project Proposal: Seasonal Vertical Distribution of Phytoplankton in a Subtropical Dystrophic Lake},
+  pdfauthor={Kristy Sullivan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Ecology Workshop Project Proposal: Seasonal Vertical Distribution of
+Phytoplankton in a Subtropical Dystrophic Lake}
+\author{Kristy Sullivan}
+\date{1/16/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{research-statement}{%
+\subsubsection{Research Statement}\label{research-statement}}
+
+Physical, chemical, and competative processes can influence the vertical
+and seasonal distribution of phytoplankton in freshwater lakes. In
+dissolved organic carbon (DOC) rich waters, the photic zone may be
+limited to just a few meters below the surface. Due to temperate bias,
+current models of phytoplankton succession are unable to predict the
+seasonal trends observed in many subtropical and tropical monomictic
+lakes. In subtropical dystrophic Lake Annie (Highlands County, FL, USA),
+dissolved organic carbon quality, quantity, and resistance to mixing may
+be strong drivers of phytoplankton assemblages spatially and temporally.
+
+\hypertarget{objectives}{%
+\subsubsection{Objectives}\label{objectives}}
+
+My goals in this workshop are to develop spatiotemporal species
+distribution models of dominant phytoplankton species in response to
+environmental drivers (i.e.~DOC, temperature, nutrients). I hope to use
+the results of this project as a chapter of my masters' thesis.
+
+\hypertarget{hypotheses}{%
+\subsubsection{Hypotheses}\label{hypotheses}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Temporal Patterns: Species diversity and richness will be greatest in
+  dark years due to increased resource availability (high DOC).
+  Mixotrophic to autotrophic phytoplankton ratios will also increase
+  with greater concentrations of DOC.
+\item
+  Vertical Patterns: Diversity and richness will be greatest in the
+  epilimnion due to greatest light availability.
+\end{enumerate}
+
+\hypertarget{datasets}{%
+\subsubsection{Datasets}\label{datasets}}
+
+The datasets to be used in this project include a personal dataset of
+phytoplankton absolute abundance, DOC quality and quantity, bacterial
+abundance, dissolved oxygen, and temperature measured quartly (November
+2018 - January 2020) from five depths (surface, 0m; chl-maximum, 2-4m;
+epilimnion, 6-9m; thermocline, 7-12m; and hypolimnion, 15m) from the
+central buoy of Lake Annie in Highlands County, FL. A second 14 year
+dataset of environmental parameters and phytoplankton net tows taken
+monthly from the center buoy at a depth of 10 meters (2006-2019) will be
+accessed with permission from Archbold Biological Station. These
+datasets will be publically available from the Archbold Biological
+Station data repository:
+\url{https://www.archbold-station.org/html/datapub/data/data.html}
+
+\hypertarget{statistical-analyses}{%
+\subsubsection{Statistical analyses}\label{statistical-analyses}}
+
+A preliminary NMDS analysis will be used to determine the common
+predictors of the observed phytoplankton distributions across time. From
+these data, I will be able to identify which species commonly occur
+together, and what environmental drivers influence their abundances. I
+will use these data to create a model which will predict the seasonal
+species distribution of phytoplankton species in Lake Annie given input
+values of the most influential drivers (i.e.~Schmidt stability, DOC
+concentration/quality, and nutrients). I hope to create a model similar
+to the well established PEG model of temperate dimictic lakes (Sommer et
+al., 1986).
+
+\hypertarget{preliminary-results}{%
+\subsubsection{Preliminary Results}\label{preliminary-results}}
+
+Figure 1 (below) shows the relative abundance of the eight phyla of
+phytoplankton found in Lake Annie from monthly 10 m vertical net tows.
+There is a high relative abundance of \emph{Bacillariophyta} (yellow)
+from years 2006-2010, while they are essentially absent years 2010-2013
+at which point \emph{Cyanophyta} and \emph{Ochrophyta} become most
+dominant. This could be due to a decreased bioavailability of silica for
+the diatoms or perhaps a shift in nutrients. Most likely, there are
+multiple drivers with additive effects causing the observed abrupt shift
+in phyla relative abundance.
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/ksull/Pictures/Kristy_Sullivan_LA_2006_2012.jpg}
+\caption{alt text}
+\end{figure}
+
+\end{document}

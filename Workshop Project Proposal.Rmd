@@ -1,8 +1,10 @@
 ---
-title: 'Ecology Workshop Project Proposal: Seasonal Vertical Distribution of Phytoplankton in a Subtropical Dystrophic Lake'
+title: 'Ecology Workshop Project Proposal: Seasonal Vertical Distribution of Phytoplankton
+  in a Subtropical Dystrophic Lake'
 author: "Kristy Sullivan"
-date: "1/10/2020"
-output: html_document
+date: "1/16/2020"
+output:
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -11,15 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Research Statement
 
-
-
-
-
-
-
-
-
-Physical, chemical, and competative processes can influence the vertical distribution of phytoplankton in freshwater lakes. In dissolved organic carbon (DOC) rich waters, the photic zone may be limited to just a few meters below the surface. In subtropical oligotrophic Lake Annie (Highlands County, FL, USA), dissolved organic carbon quality and quantity may be a strong driver of phytoplankton assemblages spatially and temporally.
+Physical, chemical, and competative processes can influence the vertical and seasonal distribution of phytoplankton in freshwater lakes. In dissolved organic carbon (DOC) rich waters, the photic zone may be limited to just a few meters below the surface. Due to temperate bias, current models of phytoplankton succession are unable to predict the seasonal trends observed in many subtropical and tropical monomictic lakes. In subtropical dystrophic Lake Annie (Highlands County, FL, USA), dissolved organic carbon quality, quantity, and resistance to mixing may be strong drivers of phytoplankton assemblages spatially and temporally.
 
 ### Objectives
 
@@ -27,8 +21,8 @@ My goals in this workshop are to develop spatiotemporal species distribution mod
 
 ### Hypotheses
 
-1. Temporal Patterns: Species diversity and richness will be greatest and most variable in dark years (high DOC).
-2. Vertical Patterns: Diversity and richness will be greatest in the epilimnion due to light and resource availability.
+1. Temporal Patterns: Species diversity and richness will be greatest in dark years due to increased resource availability (high DOC). Mixotrophic to autotrophic phytoplankton ratios will also increase with greater concentrations of DOC.
+2. Vertical Patterns: Diversity and richness will be greatest in the epilimnion due to greatest light availability.
 
 ### Datasets
 
@@ -36,20 +30,10 @@ The datasets to be used in this project include a personal dataset of phytoplank
 
 ### Statistical analyses
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+A preliminary NMDS analysis will be used to determine the common predictors of the observed phytoplankton distributions across time. From these data, I will be able to identify which species commonly occur together, and what environmental drivers influence their abundances. I will use these data to create a model which will predict the seasonal species distribution of phytoplankton species in Lake Annie given input values of the most influential drivers (i.e. Schmidt stability, DOC concentration/quality, and nutrients). I hope to create a model similar to the well established PEG model of temperate dimictic lakes (Sommer et al., 1986).
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Preliminary Results
 
-```{r cars}
-summary(cars)
-```
+Figure 1 (below) shows the relative abundance of the eight phyla of phytoplankton found in Lake Annie from monthly 10 m vertical net tows. There is a high relative abundance of *Bacillariophyta* (yellow) from years 2006-2010, while they are essentially absent years 2010-2013 at which point *Cyanophyta* and *Ochrophyta* become most dominant. This could be due to a decreased bioavailability of silica for the diatoms or perhaps a shift in nutrients. Most likely, there are multiple drivers with additive effects causing the observed abrupt shift in phyla relative abundance.
 
-### Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+![alt text](C:\Users\ksull\Pictures\Kristy_Sullivan_LA_2006_2012.jpg "Figure 1")
