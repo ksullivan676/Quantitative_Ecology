@@ -1,0 +1,67 @@
+---
+title: "Workshop 2: Nonlinear Models"
+author: "Kristy Sullivan"
+date: "1/21/2020"
+output: 
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Objectives:
+The objectives of this analysis are to fit monthly light response curve for the Harvard Forest ecosystem. These analyses will give us a better understanding of the annual photosynthesis and respiration patterns/rates in New England forests.
+
+## Methods:
+
+### Site Information: (include a map of the harvard forest site)
+The Harvard forest is a research forest owned by Harvard Univeristy located in Northwestern Massachusetts (lat/long 42.5369/-72.17266). The mixed temperate forest has an area of 3,000 acres, and is one of North America's oldest mananaged forests for research and education.
+
+![alt text](C:\Users\ksull\Documents\Quantitative_Ecology\Map-of-Harvard-Forest-and-New-England.jpg "Figure 1")
+
+*Figure 1: Map of Harvard Forest study site (Image source: Giasson et al, 2013, Ecosphere).*
+
+### Photosynthetic Potential
+Data of net ecosystem exchange (NEE) rate was visualized using the plot function. A light response curve was then determined by plotting NEE against photosynthetically active radiation (PAR). Parameters (a1, ax, and r) were then estimated for the model (NEE <- (a1 * PAR * ax)/(a1 * PAR + ax) + r) using the nls function, but were found to be unsuitable for the model. A new function was created to calculate initial values from the data using selfStart. These selfStart values for a1, ax, and r were then plugged into the model for a more appropraite fit. Finally, bootstrapping was used to estimate error within the model via resampling data.
+
+A dataframe was created to store parameter values for each respective month (Jan-Dec). A function was then created to fit the model and extract the parameters. The parameters were then added to the dataframe and the starting values were determined. The light response curve was was then fit according to the starting values. Finally, bootstrapping was used to estimate error.
+
+
+## Results:
+![alt text](C:\Users\ksull\Documents\Quantitative_Ecology\NEExPAR.jpeg "Figure 2")
+
+*Figure 2: Relationship between net ecosystem exchange (NEE) and photosynthetically active radiation (PAR).*
+
+
+![alt text](C:\Users\ksull\Documents\Quantitative_Ecology\Residuals.jpeg "Figure 3")
+*Figure 3: (1) residuals vs fitted values, (2) standardized residuals, (3) autocorrelation, and (4) histogram for the fitted model.*
+
+
+
+*Table 1: Monthly starting parameters and respective p-values. a1 = apparent quantum efficiency, ax = max ecosystem CO2 uptake rate, r = ecosystem respiration. All parameters are in units of um/m2/s.*
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Table <- tibble::tribble(
+  ~MONTH,          ~a1,         ~ax,        ~r,  ~a1.pvalue,  ~ax.pvalue,   ~r.pvalue,
+       1, -4.08142e-05, 0.004464131,   1.47093,  0.03305954,  0.03326488,           0,
+       2,  0.008348064,    1.012233,  1.253452,  0.03297912, 2.14841e-09, 2.68201e-90,
+       3,  0.000759113,  0.09939385,  1.296303,   0.7835446,   0.3520764, 2.7621e-129,
+       4,     -3.78514,    1.010519, -0.457579, 7.23958e-14, 3.00547e-16,  0.00044284,
+       5,     -0.17207,   -8.108276,  3.687535, 1.56898e-33,           0, 2.1333e-165,
+       6,   -0.8245779,   -27.51034,  5.855905, 7.5389e-151,           0, 7.1477e-180,
+       7,   -0.8732107,   -31.73946,  6.155766, 5.1821e-188,           0, 1.0618e-218,
+       8,   -0.7112455,   -31.05874,  5.739692, 1.0632e-239,           0, 6.7779e-271,
+       9,    -0.803494,   -25.08709,  4.880482, 2.3605e-201,           0, 4.0376e-297,
+      10,    -0.499972,   -7.923081,  3.146178, 1.27033e-25,           0, 2.0387e-132,
+      11,  -0.01643074,   -1.985157,  2.119615, 1.50424e-07, 5.99599e-25,           0,
+      12, -2.96188e-05, 0.000628143,  1.647433,   0.9093172,   0.9093495,           0
+  )
+
+require(knitr)
+kable(Table, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL)
+
+
+```
+
+## Discussion:
+Net ecosystem exchange (Net primary production - heterotrophic respiration) is the net amount of carbon exchanged between a given ecosystem and the atmosphere. This measurement can be used to determine whether an ecosystem is a carbon source or sink. The objective of this assignment was to determine how NEE relates to PAR (*Figure 2*) and model the relationship via estimation of parameters and bootstrapping.  Using the selfStart function, we were able to fit our model of the light response curve to NEE data (*Figure 3*). Bootstrapping allowed us to accurately estimate any errors around the parameter values and find their p-values (*Table 1*). From these data, we can conclude that our model is statistically significant at the 0.05 level for all months except March and December (see p-values) and adequately fits all parameters (a1, ax, and r).
