@@ -1,0 +1,21 @@
+---
+title: "Workshop 3: Timeseries Models"
+author: "Kristy Sullivan"
+date: "1/24/2020"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Objectives
+The primary objectives of this analysis is ...
+
+## Methods
+
+### Site Information 
+
+### Statistical Analysis
+
+## Results (minimum of 1 plot and one table)
+
+## Discussion (1 paragrapgh)
