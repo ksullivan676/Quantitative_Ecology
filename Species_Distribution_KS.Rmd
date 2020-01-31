@@ -1,0 +1,54 @@
+---
+title: 'Workshop 4: Species Distribution Models'
+author: "Kristy Sullivan"
+date: "1/31/2020"
+output:
+  word_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Objectives:
+The objectives of this exercise are to construct a species distribution model of saguro cactus (*Carnegiea gigantea*) using the bioclim approach, and then visualize precided distribution on a map.
+
+##Methods:
+
+###Species information:
+Saguro is arborescent cactus species native to the Sonora dessert in Arizona. These cacti have a very long lifespan, usually exceeding 150 years.
+
+###Statistical Analysis (Bioclim): 
+
+##Results:
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Species_Distribution_Final.jpg "Figure 1")
+
+*Figure 1: Species distribution map.*
+</center>
+
+##Discussion:
+
+
+---------------------------------------------
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ARIMA_model <- tibble::tribble(
+      ~Model,                ~Parameter,    ~N,   ~AIC,
+"arima.nee1",                        "NEE",  9, 703.09,
+"arima.nee2",    "NEE w/ corrected values", 18, 704.77,
+"arima.nee3",               "Max salinity", 12, 706.19,
+"arima.nee4", "Extreme salinity (>25 ppt)",  9, 700.57,
+"arima.nee5",                        "PAR",  9, 683.68
+  )
+
+require(knitr)
+kable(ARIMA_model, digits = 3, row.names = FALSE, align = "c",
+              caption = "*Table 1: Potential ARIMA models and respective model parameters, N value, and AIC value.*")
+```
+
+
+
+
+
