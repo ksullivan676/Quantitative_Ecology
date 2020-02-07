@@ -1,10 +1,8 @@
 ---
-title: 'Ecology Workshop Project Proposal: Seasonal Vertical Distribution of Phytoplankton
-  in a Subtropical Dystrophic Lake'
+title: "Drivers of Phytoplankton Seasonal Trends in a Subtropical Dystrophic Lake"
 author: "Kristy Sullivan"
-date: "1/16/2020"
-output:
-  pdf_document: default
+date: "2/7/2020"
+output: word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -12,28 +10,42 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Research Statement
-
-Physical, chemical, and competative processes can influence the vertical and seasonal distribution of phytoplankton in freshwater lakes. In dissolved organic carbon (DOC) rich waters, the photic zone may be limited to just a few meters below the surface. Due to temperate bias, current models of phytoplankton succession are unable to predict the seasonal trends observed in many subtropical and tropical monomictic lakes. In subtropical dystrophic Lake Annie (Highlands County, FL, USA), dissolved organic carbon quality, quantity, and resistance to mixing may be strong drivers of phytoplankton assemblages spatially and temporally.
+Physical, chemical, and competative processes can influence the vertical and seasonal distribution of phytoplankton in freshwater lakes. In organic carbon rich waters, the photic zone may be limited to just a few meters below the surface. In subtropical dystrophic Lake Annie (Highlands County, FL, USA), organic carbon quality, quantity, and resistance to mixing may be strong drivers of phytoplankton assemblages spatially and temporally. Due to temperate bias, current models of phytoplankton succession are unsatisfactory in predicting the seasonal trends observed in many subtropical and tropical monomictic lakes.
 
 ### Objectives
-
-My goals in this workshop are to develop spatiotemporal species distribution models of dominant phytoplankton species in response to environmental drivers (i.e. DOC, temperature, nutrients). I hope to use the results of this project as a chapter of my masters' thesis.
+My goals in this workshop are to develop an ARIMA model of phytoplankton richness, and potentially individual species or phyla in response to environmental drivers (i.e. TOC, DOC, temperature, nutrients). I will also create contour plots of phytoplankton species richness and species diversity (Shannon Index), and DOC quantity/quality on a seasonal timescale. I hope to use the results of this project as a chapter of my masters' thesis.
 
 ### Hypotheses
+1. Vertical Patterns: Phytoplankton diversity and richness will be greatest in the epilimnion due to increased light availability and higher quality (more autochthonous) organic matter exudated by phytoplankton. In times of mixing (January), diversity and richness will exhibit more consistancy throughout all depths.
+2. Temporal Patterns: Species diversity and richness will be lower in months with high concentrations of organic carbon due to decreased light availability.
 
-1. Temporal Patterns: Species diversity and richness will be greatest in dark years due to increased resource availability (high DOC). Mixotrophic to autotrophic phytoplankton ratios will also increase with greater concentrations of DOC.
-2. Vertical Patterns: Diversity and richness will be greatest in the epilimnion due to greatest light availability.
 
 ### Datasets
-
 The datasets to be used in this project include a personal dataset of phytoplankton absolute abundance, DOC quality and quantity, bacterial abundance, dissolved oxygen, and temperature measured quartly (November 2018 - January 2020) from five depths (surface, 0m; chl-maximum, 2-4m; epilimnion, 6-9m; thermocline, 7-12m; and hypolimnion, 15m) from the central buoy of Lake Annie in Highlands County, FL. A second 14 year dataset of environmental parameters and phytoplankton net tows taken monthly from the center buoy at a depth of 10 meters (2006-2019) will be accessed with permission from Archbold Biological Station. These datasets will be publically available from the Archbold Biological Station data repository: https://www.archbold-station.org/html/datapub/data/data.html
 
 ### Statistical analyses
-
-A preliminary NMDS analysis will be used to determine the common predictors of the observed phytoplankton distributions across time. From these data, I will be able to identify which species commonly occur together, and what environmental drivers influence their abundances. I will use these data to create a model which will predict the seasonal species distribution of phytoplankton species in Lake Annie given input values of the most influential drivers (i.e. Schmidt stability, DOC concentration/quality, and nutrients). I hope to create a model similar to the well established PEG model of temperate dimictic lakes (Sommer et al., 1986).
+A preliminary NMDS analysis will be used to determine the common predictors of the observed phytoplankton distributions across time. From these data, I will be able to identify which species commonly occur together, and what environmental drivers influence their abundances. I will use these data to create a model which will predict richness, diversity, and trends in certain phyla of phytoplankton species in Lake Annie given input values of the most influential drivers (i.e. Schmidt stability, organic carbon concentration, and nutrients). Isopleths will be created using the filled.contour function to better visualize seasonal and vertical trends in phytoplankton richness and diversity.
 
 ### Preliminary Results
+Vertical Patterns: Preliminary countour plots suggest species diversity is greatest during the month of April and generally higher in the epilimnion during months of stratification. However, this plot created using PAST statistical software does not take into account the distance between dates in interpolation (*Figure 1*). 
+Temporal Patterns: Total organic carbon (TOC) is inversely correlated to species richness during years Jan 2006-Feb 2008 and June 2012-Dec 2016. From Mar 2008-May 2012 there is a decoupling of this trend (*Figure 2*) The strong coupling of this trend tends to occur in years of high diatom (*Bacillariophyta*) abundance (*Figure 3*). Decreased bioavailability of silica for the diatoms or perhaps competition from synurophytes (*Ochrophyta*) which have a lower silica requirement may have caused the decoupling of this trend. Most likely, there are multiple drivers with additive effects causing the observed patterns.
 
-Figure 1 (below) shows the relative abundance of the eight phyla of phytoplankton found in Lake Annie from monthly 10 m vertical net tows. There is a high relative abundance of *Bacillariophyta* (yellow) from years 2006-2010, while they are essentially absent years 2010-2013 at which point *Cyanophyta* and *Ochrophyta* become most dominant. This could be due to a decreased bioavailability of silica for the diatoms or perhaps a shift in nutrients. Most likely, there are multiple drivers with additive effects causing the observed abrupt shift in phyla relative abundance.
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Contour_Plot.jpg "Figure 1")
 
-![alt text](C:\Users\ksull\Pictures\Kristy_Sullivan_LA_2006_2012.jpg "Figure 1")
+*Figure 1: Preliminary contour plot of Shannon diversity from November 2018 to January 2020. The Y-axis indicates depth in meters. Warmer colors indicate higher diversity. Created using PAST statistical software.*
+</center>
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Richness_TOC.jpg "Figure 2")
+
+*Figure 2: Species richness (top) and TOC concentration in mg/L (bottom) over a 10 year timespan of monthly phytoplankton 10m vertical net tows.*
+</center>
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Relative_Abundance.jpg "Figure 3")
+
+*Figure 3: Relative abundance of the eight phyla of phytoplankton found in Lake Annie years 2006-2012 from monthly 10m vertical net tows.*
+</center>
+
+
