@@ -1,0 +1,95 @@
+---
+title: "Drivers of Phytoplankton Seasonal Trends in a Subtropical Dystrophic Lake"
+author: "Kristy Sullivan"
+output: word_document
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Introduction
+
+Temperate biases in limnology have resulted in a disproportionately greater understanding of seasonal and multi-year trends in northern temperate lakes. Climate change and recovery from acid deposition has caused observable long-term increases in the dissolved organic carbon (DOC) concentrations of these lakes (Williamson et al. 2015; Meyer-Jacob et al. 2019). As global temperatures continue to rise, shorter durations of ice cover coupled with this “lake browning” phenomenon may promote a shift from dimictic to monomictic mixing regimes in northern temperate lakes (O'Reilly et al. 2015). Subtropical, monomictic Lake Annie (Highlands County, FL) may serve as a unique analog for these unprecedented changes.
+
+Lake Annie is a small (0.364 km^2^) yet deep (Zmax = 21 m) oligotrophic lake. The lake is 80% groundwater fed, and experiences natural fluctuations in DOC concentration (4-16 mg L^-1^). Previous studies have determined water clarity is highly sensitive to precipitation changes resulting from the Atlantic Multidecadal Oscillation (AMO) (Gaiser et al. 2009a; Gaiser et al. 2009b). In AMO cool phase years precipitation is less variable and water clarity is greater due to lesser allochthonous DOC input. In AMO warm phase years, water clarity is poor as a result of more variable yet intense precipitation and increased allochthonous DOC inputs.
+
+Due to temperate bias, current models of phytoplankton succession are unsatisfactory in predicting the seasonal trends observed in many subtropical and tropical monomictic lakes. The primary objectives of this study are to (1) describe the role of changing dissolved organic carbon concentrations on phytoplankton species richness and (2) determine the drivers of changing DOC concentrations over the same time period. I hypothesize that (1) species richness will be lower in months with high DOC concentrations due to decreased light availability and (2) groundwater elevation (water table height) will be the best predictor of in-lake DOC concentration. Time series plots and autoregressive integrated moving average (ARIMA) models were constructed from a thirteen year dataset of monthly water quality and phytoplankton relative abundance samples to elucidate the drivers of community structure. Together these data will help us understand the drivers of community shifts in subtropical Lake Annie, as well as understand the potential responses of phytoplankton communities in browning temperate lakes.
+
+### Methods
+#### Datasets
+The datasets to be used in this project include a thirteen year dataset of environmental parameters ([TOC], [DOC], and water table height) as well as phytoplankton relative abundance counts from monthly phytoplankton vertical net tows (10 m to surface, net size 20 μm). All data were collected from the lake's center buoy (*Figure 1*). These datasets were accessed with permission from Archbold Biological Station, and will be publically available from the Archbold Biological Station data repository: https://www.archbold-station.org/html/datapub/data/data.html
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Final_Project_Pictures\Lake_Annie_Map.jpg "Figure 1")
+
+*Figure 1: Map of Lake Annie (Highlands County, FL) with sample site indicated by a red dot. Image source: Google Maps.*
+</center>
+
+#### Statistical analyses: Constructing the ARIMA Model
+Time series data for (1) species richness or (2) DOC concentration were first visualized and then corrected for outliers using the tsclean function. The corrected data were then deconstructed into observed, trend, seasonal, and random plots to better understand the behavior of the data. A Dickey-Fuller test for stationarity was performed to determine if an ARIMA model would be an appropriate fit. Differencing was performed if the original time series was not stationary (p < 0.05). The data were then tested for autocorrelation. The ARIMA model was fitted using the auto.arima function to generate optimal p (lag order), d (degree of differencing), and q (moving average) values. The fit of the auto-generated ARIMA values were tested by determining if the residuals were normally distributed (ACF & PACF plots). Manual adjustments were made to parameter values if needed. In order to improve model fit, an explanitory variable, (1) DOC concentration or (2) water table height, was included as a second ARIMA model for the time series. The model with the best fit was then chosen via comparison of AIC values.
+
+
+### Results
+#### Temporal Patterns
+Time series plots of species richness and DOC suggest an inverse relationship between species richness and dissolved organic carbon concentration following periods of high groundwater elevation (Jan, 2006 to Oct, 2009 and Aug, 2013 to Oct, 2018). In years of low groundwater elevation (Nov, 2009 to July, 2013), there is a decoupling of the relationship. Interestingly, this period of decoupling coincided with unusually low abundances of diatoms (*Bacillariophyta*), where they comprised an average 1% of the community (*Figure 2*). Cyanobacteria, Synurophytes and mixotrophic algae (i.e. *Dinobryon spp.*) also became more abundant during this period.
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Final_Project_Pictures\Richness_DOC_Bacillariophyta.jpg "Figure 2")
+
+ *Figure 2: Phytoplankton species richness (top), DOC concentration in mg/L (center), and Bacillariophyta relative abundance (bottom) over time. Red lines indicate periods of richness-DOC coupling and decoupling.*
+</center>
+
+
+#### ARIMA: Phytoplankton Species Richness
+A total of eight ARIMA models were constructed based on species richness (primary variable) and species richness with DOC (explanitory variable) (*Table 1*). An original ARIMA model of the whole dataset (Jan, 2009 to Oct, 2018) proved to be a poor fit (AIC = 1000.88). This is likely due to the decoupling of species richness and DOC observed in this time period (*Figure 2*), which disrupted the model's assumptions of stability. In order to improve the ARIMA model, the dataset was broken up into three sections based on these periods of coupling and decoupling (*Figure 3*). Sectioning greatly improved model fits (AIC 313.58-356.64). Including DOC as an explanitory variable slightly improved AIC values in all models, except for the time period Nov, 2009 to July, 2013 where both DOC and the difference of DOC (diff(DOC)) were non-stationary, and therefore unfit for ARIMA modeling.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ARIMA_model <- tibble::tribble(
+        ~"Time Period",       ~"AIC: Richness",       ~"AIC: Richness w/ DOC",
+ "Jan 2009 - Oct 2018",                1067.24,                       1000.88,
+ "Jan 2006 - Oct 2009",                 317.53,                        313.58,
+"Nov 2009 - July 2013",                 316.66,                         "---",
+ "Aug 2013 - Oct 2018",                 436.33,                        356.64,
+  )
+
+require(knitr)
+kable(ARIMA_model, digits = 3, row.names = FALSE, align = "c",
+              caption = "*Table 1: AIC values for eight ARIMA models of four phytoplankton species richness time series. Original models used species richness data only, while the second model included mg/L DOC as an explanitory variable.*")
+```
+
+  
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Final_Project_Pictures\Richness_ARIMA.jpg "Figure 3")
+
+*Figure 3: ARIMA models of phytoplankton species richness. Full time series (top), Jan, 2006 - Oct, 2009 (center left), Nov, 2009 - July, 2013 (center right), and Aug, 2013 - Oct, 2018 (bottom).*
+</center>
+
+
+#### ARIMA: Dissolved Organic Carbon
+Two ARIMA models were constructed for the DOC timeseries. The first using only DOC (AIC = 424.17) and the second using DOC with water table height (ft) as an explanitory variable (AIC = 396.91). The second model provided a better fit, suggesting allochthanous DOC influxes are likely influenced by water table height (*Figure 4*).
+
+<center>
+![](C:\Users\ksull\Documents\Quantitative_Ecology\Final_Project_Pictures\ARIMA_doc_w_wtable.jpg "Figure 4")
+
+*Figure 4: ARIMA model of diff(DOC) using water table height (ft) as an explanitory variable. AIC = 356.64.*
+</center>
+
+### Discussion
+The coupling and decoupling of DOC and species richness indicate that the phytoplankton community in this lake is highly responsive to allochthonous organic matter inputs following periods of high groundwater elevation. During periods of low groundwater elevation, external variables likely have minimal influence on lake chemistry and biology. The phytoplankton community is perhaps more strongly regulated by internal dynamics such as predation, water column mixing, and stratification during this time period. During periods of high water table, there is strong evidence for the hypothesis that species richness will be lower in months with high DOC concentrations due to decreased light availability.
+
+Questions still remain regarding the low abundance of diatoms during the decoupled time period. Because diatoms require sufficient amounts of bioavailable silica to construct their frustules (cell wall), low concentrations of bioavailable silica or perhaps competition from Synurophytes which utilize silica in the form of scales, may have caused the abrupt decline in diatom relative abundance (Klaveness & Guillard, 1975). Many Synurophytes also exhibit mixotrophic strategies in which they are able switch from photoautotrophy to heterotrophy under light or nutrient stress (Jones, 2000). Mixotrophy, coupled with a lower silica requirement than most diatoms, may have given Synurophytes a stranglehold on the depleted resources during this period. Because consistant records of silica concentration do not exist for Lake Annie, examining nutrient limitiation during the decoupled period is the next best action before concluding any causes of the low diatom abundance. ARIMA models of individual species and phyla may also aid in our understanding of this microscopic community.
+
+### References
+Gaiser, E. E., N. D. Deyrup, R. W. Bachmann, L. E. Battoe, & H. M. Swain, Effects of climate variability on transparency and thermal structure in subtropical , monomictic Lake. *Fundam. Appl. Limnol.* **175**, 217–230 (2009a).
+Gaiser, E. E., N. D. Deyrup, R. W. Bachmann, L. E. Battoe, & H. M. Swain, Multidecadal climate oscillations detected in a transparency record from a subtropical. *Limnol. Oceanogr.* **54**, 2228–2232 (2009b).
+Jones, R. I. Mixotrophy in planktonic protists: an overview. *Freshw. Bio.*, **45**, 219-226 (2000).
+Klaveness, D. and R. R. L. Guillard, The requirement for silicon in *Synura petersenii* (Chrysophyceae). *J. Phyc.* **11(3)**, 349-355 (1975).
+Meyer-Jacob, C., N. Michelutti, A. M. Paterson, B. F. Cumming, W. Keller, & J. P. Smol, The browning and re-browning of lakes: Divergent lake-water organic carbon trends linked to acid deposition and climate change. *Sci. Rep.* **9**, 16676 (2019).
+O’Reilly, C. M. O., S. Sharma, D. K. Gray, S. E. Hampton, J. S. Read, R. J. Rowley, P. Schneider, J. D. Lenters, P. B. Mcintyre, B. M. Kraemer, G. A. Weyhenmeyer, D. Straile, B. Dong, R. Adrian, & M. G. Allan, Rapid and highly variable warming of lake surface waters around the globe. *Geophy. Res. Lett.* **42**, 773–781 (2015).
+Williamson, C. E.,  E. P. Overholt, R. M. Pilla, T. H. Leach, J. A. Brentrup, L. B. Knoll, E. M. Mette, & R. E. Moeller, Ecological consequences of long-term browning in lakes. *Sci. Rep.* **5**, 18666 (2015).
+
+
+

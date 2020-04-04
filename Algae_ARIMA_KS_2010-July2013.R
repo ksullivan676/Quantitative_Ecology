@@ -82,33 +82,47 @@ plot(doc.d)
 adf.test(doc)
 #If null hypothesis is not rejected, try differencing the time series w/ diff()
 adf.test(diff(doc))
-#Still not stationary --> take second difference
-adf.test(diff(diff(doc)))
+#Time series is still not stationary, and cannot be used as xreg in the ARIMA model
+
+#---------------------------------------------------------------------------------------------------------
+
+#Create a time series object:
+wtable_data <- Richness[c(47:91), c(5)]
+wtable <- ts(wtable_data, start=c(2009, 11), end=c(2013, 7), frequency =12)
+
+#Visualize the data:
+par(mfrow=c(1,1), mai=c(0.5,0.8,0.1, 0.1))
+plot(wtable , typ="l", ylab= "M amsl", xlab="")
+
+#Remove outliers:
+plot(wtable, typ="l", ylab= "[DOC]", xlab="")
+lines(tsclean(wtable) , col="blue")
+wtable <- tsclean(wtable)
+
+#Decompose the time series:
+doc.d <- decompose(wtable, 'multiplicative')
+plot(wtable.d)
+
+#Test for stationarity:
+#P-value < 0.05 indicates the time series is stationary
+adf.test(wtable)
+#If null hypothesis is not rejected, try differencing the time series w/ diff()
+adf.test(diff(wtable))
 
 #Look for significant lags:
-ccf(diff(diff(doc)),rich, na.action = na.pass, lag.max=40, plot=TRUE)
+ccf(diff(wtable),rich, na.action = na.pass, lag.max=40, plot=TRUE)
 
-#Remove Nov 2009 datapoint for richness so it can be modeled using diff(diff(doc)) --> creates same number of observations for x & xreg
-rich_data <- Richness[c(48:91), c(2)]
-rich <- ts(rich_data, start=c(2009, 12), end=c(2013, 7), frequency =12)
+#Remove Nov 2009 datapoint for richness so it can be modeled using diff(doc) --> creates same number of observations for x & xreg
+rich_data <- Richness[c(47:91), c(2)]
+rich <- ts(rich_data, start=c(2009, 11), end=c(2013, 7), frequency =12)
 
 #auto.arima() helps generate optimal p, d, & q
-arima.rich2 <-auto.arima(rich, xreg=c(diff(diff(doc)), 0), trace=TRUE)
+arima.rich2 <-auto.arima(rich, xreg=c(diff(wtable), 0), trace=TRUE)
 
 #Compare to current model
 #AIC score indicates which model is better, lower AIC = better model
 AIC(arima.rich1, arima.rich2 )
 
+#Residuals are not random (no matter what values I try) ---> cannot use wtable
 tsdisplay(residuals(arima.rich2), lag.max=45)
-
-par(mfrow=c(1,1))
-plot(rich , typ="l", ylab="Richness"); lines(fitted(arima.rich2),col="red")
-
-#Test for independence
-#Measuring for significant difference from white noise
-#Need p-value greater than 0.05
-checkresiduals(arima.rich2, lag=36)
-
-#Forcast richness for 6 months (prediction) --> does not project correct amount of time when using xreg
-plot(forecast(arima.rich2, xreg=diff(diff(doc))))
 
